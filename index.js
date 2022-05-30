@@ -18,6 +18,7 @@ async function run(){
     
     const orderCollection= client.db('toolsService').collection('orderService')
     const reviewsCollection= client.db('toolsService').collection('reviews')
+    const FacebookAccount= client.db('toolsService').collection('account')
     
 
     app.get('/service',async(req,res)=>{
@@ -91,6 +92,15 @@ app.post('/reviews', async (req, res) => {
     const orderses= await reviewsCollection.find().toArray();
     res.send(orderses)
   })
+
+
+  app.post('/account', async (req, res) => {
+    const orders = req.body;
+    
+    const results = await FacebookAccount.insertOne(orders);
+     res.send(results)
+  })
+  
     }
     finally{
 
